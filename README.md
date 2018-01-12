@@ -23,7 +23,7 @@ Syntax highlighted code block
 
 **Bold** and _Italic_ and `Code` text
 
-[Link](url) and ![Image] (http://www.fullai.org/wp-content/uploads/2016/04/AI-streams.jpg)
+[Link](url) and ![AI Streams](http://www.fullai.org/wp-content/uploads/2016/04/AI-streams.jpg)
 ```
 [Link](url) and ![Image] (http://www.fullai.org/wp-content/uploads/2016/04/AI-streams.jpg)
 
