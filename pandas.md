@@ -3,6 +3,7 @@
 ## Renaming columns
 ### Rename using a list to replace all headers
 `new_col_names = ['a', 'b', 'c']`
+
 `df.columns = new_col_names`
 
 ### Explicitly rename, if misspelled or non-existent, it will be skipped
