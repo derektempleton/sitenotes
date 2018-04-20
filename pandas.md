@@ -30,6 +30,11 @@ df = df.pivot_table(index = 'a',
     aggfunc=np.sum).reset_index()
 ```
 
+# Groupby
+```python
+df.groupby(['col_1'])['col_2_be_summed'].sum()
+```
+
 # Data types and changing between them
 df.dtypes
 .astype(int) or astype(str)
