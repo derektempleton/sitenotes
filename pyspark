@@ -1,0 +1,28 @@
+## PySpark
+
+Before you can use Spark you need to connect to a cluster to take advantage of performing calculations in parallel.
+Typically the cluster is hosted on a remote machine (edgenode) and that machine is connected to all the other machines (nodes).
+The edgenode is also referred to as the master and it is responsible for splitting the data and calculations for the nodes which are
+also referred to as slaves. The master sends the data and calculations to the slaves and the slaves send results back to the master.  
+
+To create a connection to the cluster, use the SparkContext class which takes optional arguments specifying the attributes of the cluster.  
+
+The SparkConf() constructor holds the attributes you call.   
+
+Launch PySpark
+```
+pyspark
+```
+Verify SparkContext is installed in the workspace and connected to the cluster
+```python
+print(sc) #verifies SparkContext
+print(sc.version) # identifies version of SparkContext installed
+
+# DataFrames
+In Spark, data structures are called Resilient Distributed Dataset (RDD). This low level object allows Spark to split up the data
+for the various nodes to perform the calcuations but in order to optimize performance of the complex actions required in machine learning, 
+it's necessary to use the Spark DataFrame abstraction built on top of RDDs. If you are familiar with Pandas or SQL tables, the structure
+is very simiiar.
+
+To create a Spark DataFrame, create a SparkSession object from SparkContext. SparkSession is the interface for interacting with SparkContext (the connection).
+
