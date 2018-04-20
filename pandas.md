@@ -56,6 +56,11 @@ Dealing with numbers vs strings and multiple combos
 iloc vs loc
 What is that subsetting warning?
 
+# Counting values
+df['col'].value_counts()
+Applying filter and counting values
+df[df['col1'] > 10][col2].value_counts()
+
 # Merging dataframes
 
 # Arthemtic between columns
