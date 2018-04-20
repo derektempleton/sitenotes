@@ -52,5 +52,8 @@ df['calc'] = df['a'] + df['b']
 str.zfill(4)
 str.replace
 
-
-
+# Pandas column to hashkey using hashlib
+Better to use hmac module
+```python
+df['new'] = [hashlib.md5(val.encode('utf-8')).hexdigest() for val in df[1]]
+```
