@@ -34,7 +34,22 @@ df = df.pivot_table(index = 'a',
 df.dtypes
 .astype(int) or astype(str)
 .to_numeric function
-
+```python
+type_conversion = {
+'numeric':[
+    'int_col_1','int_col_2'
+    ],
+'date':[
+    'date_col_1','date_col_2'
+    ]
+}
+for cat in type_conversion.keys():
+    for c in type_conversion[cat]:
+        if(cat == 'numeric'):
+            df[c] = pd.to_numeric(df[c], errors='coerce')
+        elif (cat == 'date'):
+            df[c] = pd.to_datetime(df[c], errors='coerce')
+```
 
 # Filtering / Subsetting dataframes
 Dealing with numbers vs strings and multiple combos
