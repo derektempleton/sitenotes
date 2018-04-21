@@ -1,5 +1,13 @@
 # Commonly used transformations in the pandas library
 
+## Data Quality and Understanding DataFrame
+pandas_profiling
+pydqc
+df.describe()
+df.info()
+df.dtypes()
+df.hist(bins=50, figsize=(20,15)) #visualize variables in histogram
+
 ## Renaming columns
 ### Rename using a list to replace all headers
 ```python
