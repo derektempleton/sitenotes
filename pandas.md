@@ -2,8 +2,8 @@
 
 ## Data Quality and Understanding DataFrame
 ```python
-pandas_profiling
-pydqc
+import pandas_profiling
+import pydqc
 df.describe()
 df.info()
 df.dtypes()
