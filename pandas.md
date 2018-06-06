@@ -100,3 +100,13 @@ df.dtypes # check conversion
 cat_columns = df.select_dtypes(['category']).columns
 df[cat_columns] = legal_df[cat_columns].apply(lambda x: x.cat.codes)
 ```
+OR
+
+```python
+cat_mapping = {'Highest' : 1,
+                'Mid' : 2
+                'Lowest' : 3}
+cat_column = 'category_col'
+legal_df[cat_column] = legal_df[cat_column].map(cat_mapping)
+legal_df[cat_column] = legal_df[cat_column].fillna(0)
+```
