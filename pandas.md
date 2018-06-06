@@ -92,3 +92,11 @@ Better to use hmac module
 ```python
 df['new'] = [hashlib.md5(val.encode('utf-8')).hexdigest() for val in df[1]]
 ```
+# Converting Categorical to Numerical Vales
+
+```python
+df['category_col'] = df['category_col'].astype('category')
+df.dtypes # check conversion
+cat_columns = df.select_dtypes(['category']).columns
+df[cat_columns] = legal_df[cat_columns].apply(lambda x: x.cat.codes)
+```
