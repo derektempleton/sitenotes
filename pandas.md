@@ -32,6 +32,7 @@ def find_col(df,col): #case sensitive
 ```
 ## Pivot Tables
 Reset the index after to get single header column.
+Be careful with NaNs. There is no "Blanks" like in Excel pivot tables, NaN rows will not be included.
 ```python
 df = df.pivot_table(index = 'a',
     columns = 'b',
@@ -40,12 +41,17 @@ df = df.pivot_table(index = 'a',
     aggfunc=np.sum).reset_index()
 ```
 
-# Groupby
+## Output results to json format
+```python
+df_group.to_json(orient='records')
+```
+
+### Groupby
 ```python
 df.groupby(['col_1'])['col_2_be_summed'].sum()
 ```
 
-# Data types and changing between them
+## Data types and changing between them
 df.dtypes
 .astype(int) or astype(str)
 .to_numeric function
@@ -65,11 +71,36 @@ for cat in type_conversion.keys():
         elif (cat == 'date'):
             df[c] = pd.to_datetime(df[c], errors='coerce')
 ```
+## Converting Categorical to Numerical Vales
+
+```python
+df['category_col'] = df['category_col'].astype('category')
+df.dtypes # check conversion
+cat_columns = df.select_dtypes(['category']).columns
+df[cat_columns] = legal_df[cat_columns].apply(lambda x: x.cat.codes)
+```
+OR
+
+```python
+cat_mapping = {'Highest' : 1,
+                'Mid' : 2
+                'Lowest' : 3}
+cat_column = 'category_col'
+legal_df[cat_column] = legal_df[cat_column].map(cat_mapping)
+legal_df[cat_column] = legal_df[cat_column].fillna(0)
+```
 
 # Filtering / Subsetting dataframes
 Dealing with numbers vs strings and multiple combos
 iloc vs loc
 What is that subsetting warning?
+```python
+df = df[df['A' == 2]]
+```
+
+Subsetting multiple values
+subset_list = [1,5,9]
+subset_df = df[df.isin(subset_list)]
 
 # Counting values
 df['col'].value_counts()
@@ -92,21 +123,5 @@ Better to use hmac module
 ```python
 df['new'] = [hashlib.md5(val.encode('utf-8')).hexdigest() for val in df[1]]
 ```
-# Converting Categorical to Numerical Vales
+# Pandas to JSON
 
-```python
-df['category_col'] = df['category_col'].astype('category')
-df.dtypes # check conversion
-cat_columns = df.select_dtypes(['category']).columns
-df[cat_columns] = legal_df[cat_columns].apply(lambda x: x.cat.codes)
-```
-OR
-
-```python
-cat_mapping = {'Highest' : 1,
-                'Mid' : 2
-                'Lowest' : 3}
-cat_column = 'category_col'
-legal_df[cat_column] = legal_df[cat_column].map(cat_mapping)
-legal_df[cat_column] = legal_df[cat_column].fillna(0)
-```
