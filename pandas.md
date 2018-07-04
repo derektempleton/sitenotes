@@ -2,15 +2,17 @@
 
 ## Importing data into Pandas
 
+### Importing CSV Files
+Also see: [https://pandas.pydata.org/pandas-docs/stable/generated/pandas.read_csv.html](Pandas Documentation)
+```python
+df = pd.read_csv(path + 'csv_file.csv', encoding = 'utf-8', sep = '\t') # tab delimited
+```
 ### Importing Excel Files
 ```python
 import pandas as pd
 df = pd.read_excel(path + 'excel_file.xlsx')
 ```
-### Importing CSV Files
-```python
-df = pd.read_csv(path + 'csv_file.csv', encoding = 'utf-8', sep = '\t') # tab delimited
-```
+
 ### Importing Several CSV Files
 ```python
 import glob
@@ -36,7 +38,7 @@ import pandas_profiling
 import pydqc
 df.describe()
 df.info()
-df.dtypes()
+df.dtypes
 df.hist(bins=50, figsize=(20,15)) #visualize variables in histogram
 ```
 
@@ -143,6 +145,19 @@ df[df['col1'] > 10][col2].value_counts()
 ```python
 df['calc'] = df['a'] + df['b']
 ```
+### Multiplying conditionally
+```python
+# Copy the column first (covers if false)
+df['AMOUNT_CAD'] = df['AMOUNT']
+# Create the condition (covers if true), then multiply the remaining slice
+df.loc[df['CURR_CODE'] == 'USD', 'AMOUNT_CAD'] = df['AMOUNT']*1.3
+# Other examples applying multiple conditions
+df['amount_group'] = '<100'
+df.loc[df['amount'] < 100,'amount_group'] = '<100'
+df.loc[(df['amount'] > 50) & (df['amount'] < 100), 'amount_group'] = '>50'
+df.loc[df['amount'] < 50,'amount_group'] = '<50'
+```
+
 
 # Cleansing data fields
 str.zfill(4)
