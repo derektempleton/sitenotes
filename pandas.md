@@ -1,5 +1,35 @@
 # Commonly used transformations in the pandas library
 
+## Importing data into Pandas
+
+### Importing Excel Files
+```python
+import pandas as pd
+df = pd.read_excel(path + 'excel_file.xlsx')
+```
+### Importing CSV Files
+```python
+df = pd.read_csv(path + 'csv_file.csv', encoding = 'utf-8', sep = '\t') # tab delimited
+```
+### Importing Several CSV Files
+```python
+import glob
+path = '/myfolder'
+all_files = glob.glob(path + "/*.csv") #Be careful of temp files in folder that begin with '~$'
+frame = pd.DataFrame()
+df_list = []
+row_cnt = 0
+
+for f in all_files:
+    df = pd.read_csv(f, index_col=None, dtype=object, encoding='ISO-8859-1') #imports all fields as object (str)
+    row_cnt += df.shape[0]
+    print('File: ',f,'Dataframe Shape: ',df.shape,'Row Tally: ', row_cnt)
+    df_list.append(df)
+
+df_concated = pd.concat(df_list)
+df_concated.shape
+```
+
 ## Data Quality and Understanding DataFrame
 ```python
 import pandas_profiling
