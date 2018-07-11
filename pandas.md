@@ -83,6 +83,28 @@ df_group.to_json(orient='records')
 df.groupby(['col_1'])['col_2_be_summed'].sum()
 ```
 
+## Dates
+
+Getting a date range through timestamp and offset
+```python
+month_offset = 2
+current_month = pd.Timestamp(pd.Timestamp.now().strftime('%Y-%m'))
+start_month = current_month - pd.DateOffset(months=month_offset)
+end_month = start_month + pd.DateOffset(months=1)
+```
+### Formatting Dates
+Filtering a dataframe by start and end dates
+Also see all possible strftime formatting options with examples here: http://strftime.org/
+```python
+month_offset = 3 # 3 months back from today
+current_month = pd.Timestamp(pd.Timestamp.now().strftime('%Y-%m'))
+start_month = current_month - pd.DateOffset(months=month_offset)
+end_month = start_month + pd.DateOffset(months=1) - pd.DateOffset(days=1)
+df = df[(df['Paid Date'] >= start_month) & (df['Paid Date'] < end_month)]
+print(current_month, start_month, end_month)
+```
+
+
 ## Data types and changing between them
 df.dtypes
 .astype(int) or astype(str)
