@@ -85,13 +85,6 @@ df.groupby(['col_1'])['col_2_be_summed'].sum()
 
 ## Dates
 
-Getting a date range through timestamp and offset
-```python
-month_offset = 2
-current_month = pd.Timestamp(pd.Timestamp.now().strftime('%Y-%m'))
-start_month = current_month - pd.DateOffset(months=month_offset)
-end_month = start_month + pd.DateOffset(months=1)
-```
 ### Formatting Dates
 Filtering a dataframe by start and end dates
 Also see all possible strftime formatting options with examples here: http://strftime.org/
@@ -192,3 +185,6 @@ df['new'] = [hashlib.md5(val.encode('utf-8')).hexdigest() for val in df[1]]
 ```
 # Pandas to JSON
 
+'''python
+df.to_json(path, orient='records')
+```
