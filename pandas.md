@@ -62,6 +62,28 @@ def find_col(df,col): #case sensitive
         if col in x:            
         print(x)
 ```
+## Accessing Values
+### Using loc and iloc
+```python
+df.loc['index3', 'col 4']
+df.iloc[3, 3]
+```
+
+### Replacing specific values
+
+Replace the row index 34 and column 6
+```python
+df.iloc[34,5] = 'my replaced string value' 
+```
+Replace specific values in a column with new values
+```python
+df.iloc[:,5] = aa_nps.iloc[:,5].replace(
+    {'old value 1' : 'new vlaue 1', 
+     'old value 2' : 'new value 2', })
+```
+
+
+
 ## Pivot Tables
 Reset the index after to get single header column.
 Be careful with NaNs. There is no "Blanks" like in Excel pivot tables, NaN rows will not be included.
