@@ -37,8 +37,8 @@ import pyodbc
 import pandas as pd
 
 # Connector for Hive
-database = 'concur'
-table = 'concur_transactions_pd_' + env 
+database = 'db'
+table = 'table'
 
 # Connection to Hadoop on Edgenode with Kerberos Authentication
 cnxn = pyodbc.connect('DRIVER={Hortonworks Hive ODBC Driver 64-bit};HOST=host.com;PORT=10000;Schema='+database+';AuthMech=1;KrbServiceName=hive;KrbHostFQDN=_HOST',autocommit=True)
