@@ -261,6 +261,11 @@ multi_key = x[x['col_a'] != 1]
 multi_key = list(multi_key['index'])
 ```
 
+# List of keys by value
+```python
+keylist = [key  for (key, value) in pydict.items() if value == 1]
+```
+
 # Pandas to JSON
 
 '''python
