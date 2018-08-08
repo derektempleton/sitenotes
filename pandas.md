@@ -31,7 +31,25 @@ for f in all_files:
 df_concated = pd.concat(df_list)
 df_concated.shape
 ```
+# Importing from Hive or SQL table
+```python
+import pyodbc
+import pandas as pd
 
+# Connector for Hive
+database = 'concur'
+table = 'concur_transactions_pd_' + env 
+
+# Connection to Hadoop on Edgenode with Kerberos Authentication
+cnxn = pyodbc.connect('DRIVER={Hortonworks Hive ODBC Driver 64-bit};HOST=host.com;PORT=10000;Schema='+database+';AuthMech=1;KrbServiceName=hive;KrbHostFQDN=_HOST',autocommit=True)
+
+# OR Connect locally by installing MIT Kerberos and HortonWorks ODBC Driver in Windows
+cnxn = pyodbc.connect("DSN=ODBC HIVE NAME", autocommit=True)
+
+# Import table as dataframe
+query = 'SELECT * FROM  db.table'
+df = pd.read_sql(query, con = cnxn)
+```
 ## Data Quality and Understanding DataFrame
 ```python
 import pandas_profiling
@@ -54,6 +72,18 @@ df.columns = new_col_names
 df = df.rename(columns={'a': 'A', 'b':'B','c':'C'})
 ```
 
+### Reformat/Standardize columns for lowercase and no spaces or special characters
+```python
+df.columns = df.columns.str.lower()
+col_underscore = []
+for c in df.columns:
+    col_underscore.append(c.replace(' ','_').replace('-','_').replace('/','_').replace('(','').replace(')','').replace('___','_').replace('__','_'))
+print(col_underscore)
+```
+## Dropping duplicate column names
+```python
+df = df.drop([i for i in list(df.columns) if '.1' in i], axis=1) 
+```
 ## Function for finding a column name
 ```python
 def find_col(df,col): #case sensitive
@@ -62,6 +92,7 @@ def find_col(df,col): #case sensitive
         if col in x:            
         print(x)
 ```
+
 ## Accessing Values
 ### Using loc and iloc
 ```python
@@ -205,6 +236,31 @@ Better to use hmac module
 ```python
 df['new'] = [hashlib.md5(val.encode('utf-8')).hexdigest() for val in df[1]]
 ```
+
+# Cleansing for CSV output
+
+```python
+dt_today = datetime.date.today().strftime('%d_%m_%Y')
+# Clean and export data, import data to test for Hive table load in Hadoop
+df_csv = df
+df_csv = df_csv.replace({'\\r':''},regex=True)        # remove carriage return
+df_csv = df_csv.replace({'\\n':''},regex=True)        # remove new lines
+df_csv = df_csv.replace({'\\t':''},regex=True)        #remove tabs
+
+df_csv.to_csv(path + '/tsv/df_' + dt_today + '.tsv',sep='\t',index=False, encoding='utf-8', header=col_underscore)
+```
+
+# Data Quality
+## Check for duplicate entries
+```python
+x = df['col_a'].value_counts()
+x = x.reset_index()
+print('Checking for duplicate entry keys...')
+print('Number of duplicate entry keys: ', len(x[x['col_a'] != 1]))
+multi_key = x[x['col_a'] != 1]
+multi_key = list(multi_key['index'])
+```
+
 # Pandas to JSON
 
 '''python
