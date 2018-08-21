@@ -95,7 +95,7 @@ send_message("Golf in summer is the best.")
 # Smart Rule-based Responses
 
 ```python
-
+import re
 
 rules = {'I want (.*)': ['What would it mean if you got {0}',
   'Why do you want {0}',
