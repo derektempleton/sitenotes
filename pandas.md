@@ -1,5 +1,14 @@
 # Commonly used transformations in the pandas library
 
+## Import Library and Set Display Options
+```python
+import pandas as pd
+#Set Display Options
+pd.set_option('display.max_rows', 500)
+pd.set_option('display.max_columns', 500)
+pd.set_option('display.width', 1000)
+```
+
 ## Importing data into Pandas
 
 ### Importing CSV Files
