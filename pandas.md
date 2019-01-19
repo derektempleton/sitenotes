@@ -117,7 +117,7 @@ df.iloc[34,5] = 'my replaced string value'
 ```
 Replace specific values in a column with new values
 ```python
-df.iloc[:,5] = aa_nps.iloc[:,5].replace(
+df.iloc[:,5] = df.iloc[:,5].replace(
     {'old value 1' : 'new vlaue 1', 
      'old value 2' : 'new value 2', })
 ```
