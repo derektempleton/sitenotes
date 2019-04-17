@@ -19,7 +19,7 @@ df = pd.read_csv(path + 'csv_file.csv', encoding = 'utf-8', sep = '\t') # tab de
 ### Importing Excel Files
 ```python
 import pandas as pd
-df = pd.read_excel(path + 'excel_file.xlsx')
+df = pd.read_excel(path + 'excel_file.xlsx', encoding='utf-8', header=0, sheet_name=2)
 ```
 
 ### Importing Several CSV Files
@@ -275,8 +275,3 @@ multi_key = list(multi_key['index'])
 keylist = [key  for (key, value) in pydict.items() if value == 1]
 ```
 
-# Pandas to JSON
-
-'''python
-df.to_json(path, orient='records')
-```
