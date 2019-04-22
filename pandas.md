@@ -180,10 +180,10 @@ for cat in type_conversion.keys():
         elif (cat == 'date'):
             df[c] = pd.to_datetime(df[c], errors='coerce')
 ```
-## Converting Categorical to Numerical Vales
+## Converting Data Types
 
 ```python
-df['category_col'] = df['category_col'].astype('category')
+df['category_col'] = df['category_col'].astype('category') 
 df.dtypes # check conversion
 cat_columns = df.select_dtypes(['category']).columns
 df[cat_columns] = legal_df[cat_columns].apply(lambda x: x.cat.codes)
@@ -197,6 +197,12 @@ cat_mapping = {'Highest' : 1,
 cat_column = 'category_col'
 legal_df[cat_column] = legal_df[cat_column].map(cat_mapping)
 legal_df[cat_column] = legal_df[cat_column].fillna(0)
+```
+OR
+```python
+# Convert any float numbers to integers
+integer_cols = list(df.select_dtypes(['float64']).columns)
+df[integer_cols] = value_df[integer_cols].fillna(0.0).astype('int64')
 ```
 
 # Filtering / Subsetting dataframes
