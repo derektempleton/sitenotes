@@ -214,14 +214,16 @@ df = df[df['A' == 2]]
 ```
 
 Subsetting multiple values
+```python
 subset_list = [1,5,9]
 subset_df = df[df.isin(subset_list)]
-
+```
 # Counting values
+```python
 df['col'].value_counts()
 Applying filter and counting values
 df[df['col1'] > 10][col2].value_counts()
-
+```
 # Merging dataframes
 
 # Arthemtic between columns
